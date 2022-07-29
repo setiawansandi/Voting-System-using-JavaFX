@@ -1,28 +1,25 @@
 package application;
 
 import java.io.IOException;
-import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
+import classes.LoginManager;
+import interfaces.WindowClose;
+import interfaces.WindowLoad;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class LoginController {
+public class LoginController implements WindowClose, WindowLoad{
 
 	@FXML
     private Button btn_login;
@@ -33,33 +30,46 @@ public class LoginController {
     @FXML
     private TextField tv_userid;
     
+    
     @FXML
     void onLoginClick(ActionEvent event) throws SQLException {
-    	if(LoginManager.isLogin(tv_userid.getText(), tv_password.getText())) {
-    		System.out.println("is connected");
-    	} else System.out.println("L bozo");
-    	// check id and pw
-    	// next window
+    	String fxml;
     	
-    	//switch change file name
+    	if(LoginManager.checkLogin(tv_userid.getText().toUpperCase(), tv_password.getText()) == "user") {
+    		//System.out.println("user");
+    		fxml = "/fxml/" + "userHome.fxml";
+    	} else if(LoginManager.checkLogin(tv_userid.getText().toUpperCase(), tv_password.getText()) == "admin") {
+    		//System.out.println("admin");
+    		fxml = "/fxml/" + "adminHome.fxml";
+    	} else {
+    		JOptionPane.showMessageDialog(null, "Please check your login details","Login failed", JOptionPane.INFORMATION_MESSAGE);
+    		return;
+    	}
     	
-//    	try {
-//            HBox root = (HBox)FXMLLoader.load(getClass().getResource("adminHome.fxml"));
-//            Scene scene2 = new Scene(root,1120, 630);
-//            scene2.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-//            Stage Window2 = new Stage();
-//            Window2.initModality(Modality.APPLICATION_MODAL);
-//            Window2.setScene(scene2);
-//            Window2.show();
-//        }
-//        catch(IOException e){
-//            System.out.println(e.getMessage());
-//        }
-//
-//        Stage window2 = (Stage)((Node)event.getSource()).getScene().getWindow();
-//        window2.close();
+    	windowLoad(fxml);
+    	windowClose(event);
     }
-    
+
+	@Override
+	public void windowLoad(String fxml) {
+		try {
+    		HBox root = (HBox)FXMLLoader.load(getClass().getResource(fxml));
+			Scene scene = new Scene(root,1120, 630); //*70
+			scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
+			Stage adminWindow = new Stage();
+			adminWindow.setTitle("Admin Panel");
+			adminWindow.setScene(scene);
+			adminWindow.show();
+    	} catch (IOException e) {
+    		System.out.println(e.getMessage());
+    	}
+	}
+
+	@Override
+	public void windowClose(ActionEvent event) {
+		Stage previousWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
+    	previousWindow.close();
+	}
     
     
 

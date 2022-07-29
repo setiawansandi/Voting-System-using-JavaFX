@@ -1,9 +1,9 @@
 package application;
 	
+import classes.SQLdatabase;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.fxml.FXMLLoader;
 
@@ -12,9 +12,9 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			HBox root = (HBox)FXMLLoader.load(getClass().getResource("login.fxml"));
+			HBox root = (HBox)FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
 			Scene scene = new Scene(root,1120, 630); //*70
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
 			primaryStage.setTitle("Voting System");
 			primaryStage.setScene(scene);
 			primaryStage.show();

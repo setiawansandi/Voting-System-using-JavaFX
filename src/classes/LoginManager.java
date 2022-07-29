@@ -1,12 +1,12 @@
-package application;
+package classes;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LoginManager {
+public class LoginManager{
 	
-	static boolean isLogin(String user, String password) throws SQLException {
+	public static String checkLogin(String user, String password) throws SQLException {
     	//System.out.println(SQLdatabase.isDbConnected());
     	PreparedStatement preparedStatement = null;
     	ResultSet resultSet = null;
@@ -20,11 +20,11 @@ public class LoginManager {
     		
     		resultSet = preparedStatement.executeQuery();
     		if (resultSet.next()) {
-    			return true;
+    			return "user";
     		}
     		
     	} catch (Exception e) {
-    		
+    		System.out.println(e);
     	}
     	
     	try {
@@ -34,16 +34,16 @@ public class LoginManager {
     		
     		resultSet = preparedStatement.executeQuery();
     		if (resultSet.next()) {
-    			return true;
+    			return "admin";
     		}
     		
     	} catch (Exception e) {
-    		
+    		System.out.println(e);
     	}
     	preparedStatement.close();
     	resultSet.close();
     	
-		return false;
+		return "fail";
     	
     }
 }
