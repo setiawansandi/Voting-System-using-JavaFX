@@ -1,5 +1,5 @@
 package interfaces;
 
 public interface WindowLoad {
-	void windowLoad(String fxml);
+	void windowLoad(String fxml, String windowTitle);
 }

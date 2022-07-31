@@ -1,1 +1,4 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.toggle-switch {
+    -fx-skin: "impl.jfxtras.styles.jmetro8.MetroToggleSwitchSkin";
+}

@@ -6,12 +6,14 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import classes.LoginManager;
+import classes.Voter;
 import interfaces.WindowClose;
 import interfaces.WindowLoad;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -33,31 +35,37 @@ public class LoginController implements WindowClose, WindowLoad{
     
     @FXML
     void onLoginClick(ActionEvent event) throws SQLException {
-    	String fxml;
+    	String fxml, title;
     	
     	if(LoginManager.checkLogin(tv_userid.getText().toUpperCase(), tv_password.getText()) == "user") {
     		//System.out.println("user");
-    		fxml = "/fxml/" + "userHome.fxml";
+    		fxml = "/fxml/" + "userNavigation.fxml";
+    		title = "Voter Panel";
+    		LoginManager.setVoter(tv_userid.getText().toUpperCase());
+
     	} else if(LoginManager.checkLogin(tv_userid.getText().toUpperCase(), tv_password.getText()) == "admin") {
     		//System.out.println("admin");
-    		fxml = "/fxml/" + "adminHome.fxml";
+    		fxml = "/fxml/" + "adminNavigation.fxml";
+    		title = "Admin Panel";
+    		LoginManager.setAdmin(tv_userid.getText().toUpperCase());
+    		
     	} else {
     		JOptionPane.showMessageDialog(null, "Please check your login details","Login failed", JOptionPane.INFORMATION_MESSAGE);
     		return;
     	}
     	
-    	windowLoad(fxml);
+    	windowLoad(fxml, title);
     	windowClose(event);
     }
 
 	@Override
-	public void windowLoad(String fxml) {
+	public void windowLoad(String fxml, String windowTitle) {
 		try {
-    		HBox root = (HBox)FXMLLoader.load(getClass().getResource(fxml));
+    		Parent root = (Parent)FXMLLoader.load(getClass().getResource(fxml));
 			Scene scene = new Scene(root,1120, 630); //*70
 			scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
 			Stage adminWindow = new Stage();
-			adminWindow.setTitle("Admin Panel");
+			adminWindow.setTitle(windowTitle);
 			adminWindow.setScene(scene);
 			adminWindow.show();
     	} catch (IOException e) {

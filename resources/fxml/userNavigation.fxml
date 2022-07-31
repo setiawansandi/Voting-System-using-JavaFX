@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="mainBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="1120.0" style="-fx-background-color: #42526e;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UserNavigationController">
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="160.0" style="-fx-background-color: #253858;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefWidth="160.0">
+               <children>
+                  <Button fx:id="btn_home" mnemonicParsing="false" onAction="#goToHome" prefWidth="120.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="Home" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="25.0" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="btn_editUser" mnemonicParsing="false" onAction="#goToVote" prefWidth="120.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="Vote" textFill="#bbbbbb">
+                     <font>
+                        <Font name="Segoe UI" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="25.0" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="btn_editVote" mnemonicParsing="false" onAction="#goToResult" prefWidth="120.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="Result" textFill="#bbbbbb">
+                     <font>
+                        <Font name="Segoe UI" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="25.0" />
+                     </padding>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets left="32.0" top="35.0" />
+               </padding>
+            </VBox>
+            <Button layoutY="577.0" mnemonicParsing="false" onAction="#logout" prefWidth="120.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="Logout" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0">
+               <font>
+                  <Font name="Segoe UI" size="18.0" />
+               </font>
+               <padding>
+                  <Insets left="32.0" />
+               </padding>
+            </Button>
+         </children>
+      </AnchorPane>
+   </left>
+   
+   <center>
+   		<fx:include source="userHomeView.fxml" />
+   </center>
+</BorderPane>

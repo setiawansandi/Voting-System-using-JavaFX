@@ -5,7 +5,6 @@ abstract class User {
 	private String fname = "";
 	private String lname = "";
 	private String email = "";
-	private String loginStatus = "";
 	
 	public String getEmail() {
 		return email;
@@ -13,14 +12,6 @@ abstract class User {
 	
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	
-	public String getLoginStatus() {
-		return loginStatus;
-	}
-	
-	public void setLoginStatus(String loginStatus) {
-		this.loginStatus = loginStatus;
 	}
 	
 	public String getUserID() {
@@ -43,6 +34,17 @@ abstract class User {
 	
 	public void setLname(String lname) {
 		this.lname = lname;
+	}
+	
+	public User(String userID, String fname, String lname, String email) {
+		this.userID = userID;
+		this.fname = fname;
+		this.lname = lname;
+		this.email = email;
+	}
+	
+	public User() {
+		
 	}
 	
 }
