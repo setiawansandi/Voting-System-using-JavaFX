@@ -18,7 +18,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AdminEditVoteViewController">
    <children>
-      <VBox maxHeight="140.0" prefHeight="115.0" prefWidth="600.0" style="-fx-background-color: #42526e;">
+      <VBox maxHeight="140.0" prefHeight="115.0" style="-fx-background-color: #42526e;">
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
@@ -115,15 +115,15 @@
             <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
          </padding>
       </VBox>
-      <VBox prefHeight="200.0" prefWidth="600.0" style="-fx-background-color: #42526e;" VBox.vgrow="ALWAYS">
+      <VBox prefHeight="200.0" style="-fx-background-color: #42526e;" VBox.vgrow="ALWAYS">
          <children>
-            <TableView fx:id="table_user" prefHeight="263.0" prefWidth="570.0" style="-fx-background-radius: 0 0 10 10;" VBox.vgrow="ALWAYS">
+            <TableView fx:id="table_cand" prefHeight="263.0" prefWidth="570.0" style="-fx-background-radius: 0 0 10 10;" VBox.vgrow="ALWAYS">
               <columns>
-                  <TableColumn fx:id="col_img" maxWidth="-1.0" minWidth="120.0" prefWidth="-1.0" text="Image" />
+                  <TableColumn fx:id="col_img" maxWidth="-1.0" minWidth="120.0" prefWidth="-1.0" style="-fx-alignment: TOP-CENTER;" text="Photo" />
                   <TableColumn fx:id="col_candid" maxWidth="130.0" minWidth="120.0" prefWidth="-1.0" text="CandidateID" />
                 <TableColumn fx:id="col_fn" maxWidth="150.0" minWidth="130.0" prefWidth="-1.0" text="First Name" />
                 <TableColumn fx:id="col_ln" maxWidth="150.0" minWidth="130.0" prefWidth="-1.0" text="Last Name" />
-                  <TableColumn fx:id="col_lastLog" maxWidth="130.0" minWidth="120.0" prefWidth="-1.0" text="No. of Votes" />
+                  <TableColumn fx:id="col_totalVote" maxWidth="130.0" minWidth="120.0" prefWidth="-1.0" text="No. of Votes" />
                   <TableColumn fx:id="col_email" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="-1.0" text="Email" />
               </columns>
                <columnResizePolicy>

@@ -89,10 +89,9 @@
          <children>
             <TableView fx:id="table_user" prefHeight="263.0" prefWidth="570.0" style="-fx-background-radius: 0 0 10 10;" VBox.vgrow="ALWAYS">
               <columns>
-                  <TableColumn fx:id="col_userid" maxWidth="130.0" minWidth="120.0" prefWidth="-1.0" text="UserID" />
-                <TableColumn fx:id="col_fn" maxWidth="150.0" minWidth="130.0" prefWidth="-1.0" text="First Name" />
-                <TableColumn fx:id="col_ln" maxWidth="150.0" minWidth="130.0" prefWidth="-1.0" text="Last Name" />
-                  <TableColumn fx:id="col_lastLog" maxWidth="130.0" minWidth="120.0" prefWidth="-1.0" text="Last Login" />
+                  <TableColumn fx:id="col_userid" maxWidth="150.0" minWidth="130.0" prefWidth="-1.0" text="UserID" />
+                <TableColumn fx:id="col_fn" maxWidth="170.0" minWidth="150.0" prefWidth="-1.0" text="First Name" />
+                <TableColumn fx:id="col_ln" maxWidth="170.0" minWidth="150.0" prefWidth="-1.0" text="Last Name" />
                   <TableColumn fx:id="col_hasVoted" maxWidth="120.0" minWidth="110.0" prefWidth="-1.0" text="Has Voted" />
                   <TableColumn fx:id="col_email" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="-1.0" text="email" />
               </columns>
@@ -102,7 +101,7 @@
             </TableView>
             <HBox alignment="BOTTOM_LEFT" prefHeight="40.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="btn_addUser" maxWidth="130.0" minWidth="130.0" mnemonicParsing="false" style="-fx-background-color: #0052cc;" text="Add User" textFill="WHITE">
+                  <Button fx:id="btn_addUser" maxWidth="130.0" minWidth="130.0" mnemonicParsing="false" onAction="#addUser" style="-fx-background-color: #0052cc;" text="Add User" textFill="WHITE">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>

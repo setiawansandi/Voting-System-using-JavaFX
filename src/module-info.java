@@ -7,4 +7,5 @@ module Voting_System {
 	requires java.sql;
 	
 	opens application to javafx.graphics, javafx.fxml;
+	opens classes to javafx.graphics, javafx.fxml, javafx.base;
 }

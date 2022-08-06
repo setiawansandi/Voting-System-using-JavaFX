@@ -94,7 +94,7 @@
 						</VBox>
 						<HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="NEVER">
 							<children>
-								<VBox alignment="CENTER" maxHeight="300.0" maxWidth="300.0" minHeight="200.0" minWidth="200.0" style="-fx-background-color: #ebecf0; -fx-background-radius: 20 0 0 20;">
+								<VBox alignment="CENTER" maxHeight="300.0" maxWidth="300.0" minHeight="200.0" minWidth="200.0" style="-fx-background-color: #ebecf0; -fx-background-radius: 20;">
 									<children>
 										<Text fx:id="dash_candidate" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
 											<font>
@@ -107,8 +107,11 @@
 											</font>
 										</Text>
 									</children>
+                           <HBox.margin>
+                              <Insets right="30.0" />
+                           </HBox.margin>
 								</VBox>
-								<VBox alignment="CENTER" maxHeight="300.0" maxWidth="300.0" minHeight="200.0" minWidth="200.0" style="-fx-background-color: #ebecf0; -fx-background-radius: 0;">
+								<VBox alignment="CENTER" maxHeight="300.0" maxWidth="300.0" minHeight="200.0" minWidth="200.0" style="-fx-background-color: #ebecf0; -fx-background-radius: 20 0 0 20;">
 									<children>
 										<Text fx:id="dash_voted" fill="#36b37e" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
 											<font>
@@ -138,7 +141,7 @@
 								</VBox>
 							</children>
 							<HBox.margin>
-								<Insets left="60.0" />
+								<Insets left="30.0" />
 							</HBox.margin>
 						</HBox>
 					</children>
