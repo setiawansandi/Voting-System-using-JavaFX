@@ -1,4 +1,4 @@
-package classes;
+package models;
 
 public class Admin extends User{
 	private static Admin instance = null;

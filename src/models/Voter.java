@@ -1,4 +1,4 @@
-package classes;
+package models;
 
 public class Voter extends User{
 	private String hasVoted;
@@ -21,7 +21,7 @@ public class Voter extends User{
 		return instance;
 	}
 
-	public String isHasVoted() {
+	public String getHasVoted() {
 		return hasVoted;
 	}
 

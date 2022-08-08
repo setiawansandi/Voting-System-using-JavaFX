@@ -5,8 +5,11 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import models.Voter;
 
 public class UserHomeViewController implements Initializable{
 
@@ -21,15 +24,22 @@ public class UserHomeViewController implements Initializable{
 
     @FXML
     private Text tv_secs;
+    
+    @FXML
+    private ImageView lbozo;
+    
+    @FXML
+    private Text tv_fname;
 
     @FXML
     void goToVote(MouseEvent event) {
-    	
+    	// implements later
     }
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+		lbozo.setImage(new Image(this.getClass().getResourceAsStream("/img/vote.png")));
+		tv_fname.setText(Voter.getInstance().getFname());
 	}
 
 }

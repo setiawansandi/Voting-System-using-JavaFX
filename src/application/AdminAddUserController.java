@@ -1,12 +1,12 @@
 package application;
 
-import classes.Admin;
-import classes.VotingServer;
 import interfaces.WindowClose;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import models.Admin;
+import models.VotingServer;
 
 public class AdminAddUserController implements WindowClose{
 	VotingServer votingServer = new VotingServer();

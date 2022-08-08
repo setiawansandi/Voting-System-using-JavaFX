@@ -1,4 +1,4 @@
-package classes;
+package models;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

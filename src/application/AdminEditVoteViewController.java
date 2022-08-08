@@ -1,24 +1,35 @@
 package application;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-import classes.Admin;
-import classes.Candidate;
-import classes.VotingServer;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import models.Admin;
+import models.Candidate;
+import models.VotingServer;
 
 public class AdminEditVoteViewController implements Initializable{
 	
 	VotingServer votingServer = new VotingServer();
+	private boolean isSettingOpen = false;
 	
 	@FXML
     private Button btn_addUser;
@@ -58,11 +69,36 @@ public class AdminEditVoteViewController implements Initializable{
 
     @FXML
     private TextField tv_search;
+    
+    @FXML
+    private DatePicker datepicker_end;
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		initTable();
-	}
+    @FXML
+    private DatePicker datepicker_start;
+    
+    @FXML
+    private CheckBox checkbox_result;
+    
+    @FXML
+    private VBox mainVbox;
+    
+    @FXML
+    private VBox settingMenu;
+    
+    @FXML
+    private HBox hbox_setting;
+	
+	@FXML
+    void dateSave(ActionEvent event) {
+		LocalDate start = datepicker_start.getValue();
+		LocalDate end = datepicker_end.getValue();
+		Admin.getInstance().getVotingServer().saveDate(start, end);
+    }
+
+    @FXML
+    void showResultSave(ActionEvent event) {
+
+    }
 	
 	void initTable() {
 		ObservableList<Candidate> list;
@@ -78,4 +114,49 @@ public class AdminEditVoteViewController implements Initializable{
 		
 		table_cand.setItems(list);
 	}
+	
+	void initSettings() {
+		datepicker_start.setValue(VotingServer.getStartDate());
+		datepicker_end.setValue(VotingServer.getEndDate());
+		
+		if(VotingServer.isVotingResultShown()) {
+			checkbox_result.setSelected(true);
+		} else checkbox_result.setSelected(false);
+	}
+	
+	void initHandlers() {
+		initSettingHandler();
+		initVboxHandler();
+	}
+	
+	void initSettingHandler() {
+		hbox_setting.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+		     @Override
+		     public void handle(MouseEvent event) {
+		    	 // update menu visibility
+		    	 initSettings();
+		    	 settingMenu.setVisible(!isSettingOpen);
+		    	 isSettingOpen = !isSettingOpen;
+		         event.consume();
+		     }
+		});
+	}
+	
+	void initVboxHandler() {
+		mainVbox.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+		     @Override
+		     public void handle(MouseEvent event) {
+		    	 settingMenu.setVisible(false);
+		         event.consume();
+		     }
+		});
+	}
+	
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		initTable();
+		initSettings();
+		initHandlers();
+	}
+	
 }

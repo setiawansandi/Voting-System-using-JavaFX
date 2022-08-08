@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import classes.Admin;
-import classes.VotingServer;
-import classes.VoterStruct;
 import interfaces.WindowLoad;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,6 +18,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import models.Admin;
+import models.VoterStruct;
+import models.VotingServer;
 
 public class AdminEditUserViewController implements Initializable, WindowLoad{
 	Admin admin = Admin.getInstance();

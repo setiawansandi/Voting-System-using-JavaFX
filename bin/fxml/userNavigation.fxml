@@ -21,7 +21,7 @@
                         <Insets bottom="25.0" />
                      </padding>
                   </Button>
-                  <Button fx:id="btn_editUser" mnemonicParsing="false" onAction="#goToVote" prefWidth="120.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="Vote" textFill="#bbbbbb">
+                  <Button fx:id="btn_vote" mnemonicParsing="false" onAction="#goToVote" prefWidth="120.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="Vote" textFill="#bbbbbb">
                      <font>
                         <Font name="Segoe UI" size="18.0" />
                      </font>
@@ -29,7 +29,7 @@
                         <Insets bottom="25.0" />
                      </padding>
                   </Button>
-                  <Button fx:id="btn_editVote" mnemonicParsing="false" onAction="#goToResult" prefWidth="120.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="Result" textFill="#bbbbbb">
+                  <Button fx:id="btn_result" mnemonicParsing="false" onAction="#goToResult" prefWidth="120.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="Result" textFill="#bbbbbb">
                      <font>
                         <Font name="Segoe UI" size="18.0" />
                      </font>

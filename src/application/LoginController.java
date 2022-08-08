@@ -5,8 +5,6 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
-import classes.LoginManager;
-import classes.Voter;
 import interfaces.WindowClose;
 import interfaces.WindowLoad;
 import javafx.event.ActionEvent;
@@ -20,6 +18,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import models.LoginManager;
+import models.Voter;
 
 public class LoginController implements WindowClose, WindowLoad{
 

@@ -2,7 +2,9 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -12,156 +14,276 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AdminEditVoteViewController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AdminEditVoteViewController">
    <children>
-      <VBox maxHeight="140.0" prefHeight="115.0" style="-fx-background-color: #42526e;">
+      <VBox fx:id="mainVbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="960.0">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <VBox maxHeight="140.0" prefHeight="115.0" style="-fx-background-color: #42526e;">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Voting System">
-                     <font>
-                        <Font name="Segoe UI" size="36.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets top="14.0" />
-                     </HBox.margin>
-                  </Text>
-                  <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                  <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="110.0">
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Voting System">
+                           <font>
+                              <Font name="Segoe UI" size="36.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets top="14.0" />
+                           </HBox.margin>
+                        </Text>
+                        <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="file:/D:/eclipse-workspace/Voting_System/resources/img/setting_214.png" />
-                                 </image>
+                              <HBox fx:id="hbox_setting" alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="110.0">
+                                 <children>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="file:/D:/eclipse-workspace/Voting_System/resources/img/setting_214.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <Text fx:id="iv_setting" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings">
+                                       <font>
+                                          <Font name="Segoe UI" size="18.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
                                  <HBox.margin>
-                                    <Insets right="10.0" />
+                                    <Insets bottom="6.0" right="5.0" />
                                  </HBox.margin>
-                              </ImageView>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings">
+                              </HBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" minHeight="60.0" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-background-radius: 5;">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <children>
+                        <GridPane HBox.hgrow="ALWAYS">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="519.2000061035156" minWidth="10.0" prefWidth="490.3999877929688" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="418.3999206542968" minWidth="10.0" prefWidth="213.60001220703123" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="420.40002441406244" minWidth="10.0" prefWidth="194.80007934570312" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Search" GridPane.halignment="LEFT">
                                  <font>
-                                    <Font name="Segoe UI" size="18.0" />
+                                    <Font name="Segoe UI" size="14.0" />
                                  </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="10.0" />
+                                 </GridPane.margin>
                               </Text>
+                              <TextField fx:id="tv_search" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets right="50.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Filter" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font name="Segoe UI" size="14.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="10.0" />
+                                 </GridPane.margin>
+                              </Text>
+                              <ChoiceBox fx:id="cb_category" prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
+                                 <children>
+                                    <Button fx:id="btn_search" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: #0052cc;" text="Search" textFill="WHITE">
+                                       <font>
+                                          <Font name="Segoe UI Bold" size="14.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
                            </children>
                            <HBox.margin>
-                              <Insets bottom="6.0" right="5.0" />
+                              <Insets bottom="8.0" top="8.0" />
                            </HBox.margin>
-                        </HBox>
+                        </GridPane>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
+               </padding>
+            </VBox>
+            <VBox prefHeight="200.0" style="-fx-background-color: #42526e;" VBox.vgrow="ALWAYS">
+               <children>
+                  <TableView fx:id="table_cand" prefHeight="263.0" prefWidth="570.0" style="-fx-background-radius: 0 0 10 10;" VBox.vgrow="ALWAYS">
+                     <columns>
+                        <TableColumn fx:id="col_img" maxWidth="-1.0" minWidth="120.0" prefWidth="-1.0" style="-fx-alignment: TOP-CENTER;" text="Photo" />
+                        <TableColumn fx:id="col_candid" maxWidth="130.0" minWidth="120.0" prefWidth="-1.0" text="CandidateID" />
+                        <TableColumn fx:id="col_fn" maxWidth="150.0" minWidth="130.0" prefWidth="-1.0" text="First Name" />
+                        <TableColumn fx:id="col_ln" maxWidth="150.0" minWidth="130.0" prefWidth="-1.0" text="Last Name" />
+                        <TableColumn fx:id="col_totalVote" maxWidth="130.0" minWidth="120.0" prefWidth="-1.0" text="No. of Votes" />
+                        <TableColumn fx:id="col_email" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="-1.0" text="Email" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="40.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btn_addUser" maxWidth="130.0" minWidth="130.0" mnemonicParsing="false" style="-fx-background-color: #0052cc;" text="Add Candidate" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Segoe UI Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btn_delete" maxWidth="130.0" minWidth="130.0" mnemonicParsing="false" style="-fx-background-color: #DE350B;" text="Delete Selected" textFill="WHITE">
+                           <font>
+                              <Font name="Segoe UI Bold" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="btn_clear" maxWidth="130.0" minWidth="130.0" mnemonicParsing="false" style="-fx-background-color: #DE350B;" text="Clear Data" textFill="WHITE">
+                           <font>
+                              <Font name="Segoe UI Bold" size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="30.0" right="30.0" top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+      </VBox>
+      <VBox fx:id="settingMenu" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="285.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" visible="false" StackPane.alignment="TOP_RIGHT">
+         <StackPane.margin>
+            <Insets right="40.0" top="80.0" />
+         </StackPane.margin>
+         <children>
+            <HBox maxHeight="-Infinity" prefHeight="25.0" prefWidth="200.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="18.0" />
+                     </font>
+                  </Text>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button maxWidth="-Infinity" mnemonicParsing="false" prefWidth="50.0" style="-fx-background-color: #0052cc;" text="Save" textFill="WHITE">
+                           <font>
+                              <Font name="Segoe UI Semibold" size="12.0" />
+                           </font>
+                        </Button>
                      </children>
                   </HBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" minHeight="60.0" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-background-radius: 5;">
+            <HBox alignment="BOTTOM_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="170.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="25.0" prefWidth="50.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start" />
+                     </children>
+                  </HBox>
+                  <DatePicker fx:id="datepicker_start" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="120.0" />
+               </children>
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="170.0">
                <children>
-                  <GridPane HBox.hgrow="ALWAYS">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="519.2000061035156" minWidth="10.0" prefWidth="490.3999877929688" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="418.3999206542968" minWidth="10.0" prefWidth="213.60001220703123" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="420.40002441406244" minWidth="10.0" prefWidth="194.80007934570312" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                  <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="50.0">
                      <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Search" GridPane.halignment="LEFT">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="End" />
+                     </children>
+                  </HBox>
+                  <DatePicker fx:id="datepicker_end" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="120.0" />
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox maxHeight="-Infinity" prefHeight="25.0" prefWidth="200.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Result">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="18.0" />
+                     </font>
+                  </Text>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button maxWidth="-Infinity" mnemonicParsing="false" prefWidth="50.0" style="-fx-background-color: #0052cc;" text="Save" textFill="WHITE">
                            <font>
-                              <Font name="Segoe UI" size="14.0" />
+                              <Font name="Segoe UI Semibold" size="12.0" />
                            </font>
-                           <GridPane.margin>
-                              <Insets bottom="10.0" />
-                           </GridPane.margin>
-                        </Text>
-                        <TextField fx:id="tv_search" GridPane.rowIndex="1">
-                           <GridPane.margin>
-                              <Insets right="50.0" />
-                           </GridPane.margin>
-                        </TextField>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Filter" GridPane.columnIndex="1">
-                           <font>
-                              <Font name="Segoe UI" size="14.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets bottom="10.0" />
-                           </GridPane.margin>
-                        </Text>
-                        <ChoiceBox fx:id="cb_category" prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
-                           <children>
-                              <Button fx:id="btn_search" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: #0052cc;" text="Search" textFill="WHITE">
-                                 <font>
-                                    <Font name="Segoe UI Bold" size="14.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </HBox>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets top="25.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox>
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="50.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Show Result:" />
                      </children>
                      <HBox.margin>
-                        <Insets bottom="8.0" top="8.0" />
+                        <Insets right="30.0" />
                      </HBox.margin>
-                  </GridPane>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <CheckBox fx:id="checkbox_result" alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Shown" />
+                     </children>
+                  </HBox>
                </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
             </HBox>
-         </children>
-         <padding>
-            <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
-         </padding>
-      </VBox>
-      <VBox prefHeight="200.0" style="-fx-background-color: #42526e;" VBox.vgrow="ALWAYS">
-         <children>
-            <TableView fx:id="table_cand" prefHeight="263.0" prefWidth="570.0" style="-fx-background-radius: 0 0 10 10;" VBox.vgrow="ALWAYS">
-              <columns>
-                  <TableColumn fx:id="col_img" maxWidth="-1.0" minWidth="120.0" prefWidth="-1.0" style="-fx-alignment: TOP-CENTER;" text="Photo" />
-                  <TableColumn fx:id="col_candid" maxWidth="130.0" minWidth="120.0" prefWidth="-1.0" text="CandidateID" />
-                <TableColumn fx:id="col_fn" maxWidth="150.0" minWidth="130.0" prefWidth="-1.0" text="First Name" />
-                <TableColumn fx:id="col_ln" maxWidth="150.0" minWidth="130.0" prefWidth="-1.0" text="Last Name" />
-                  <TableColumn fx:id="col_totalVote" maxWidth="130.0" minWidth="120.0" prefWidth="-1.0" text="No. of Votes" />
-                  <TableColumn fx:id="col_email" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="-1.0" text="Email" />
-              </columns>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
-            </TableView>
-            <HBox alignment="BOTTOM_LEFT" prefHeight="40.0" prefWidth="200.0">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Stop Voting">
+               <font>
+                  <Font name="Segoe UI Semibold" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Text>
+            <HBox>
                <children>
-                  <Button fx:id="btn_addUser" maxWidth="130.0" minWidth="130.0" mnemonicParsing="false" style="-fx-background-color: #0052cc;" text="Add Candidate" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets right="20.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Segoe UI Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="btn_delete" maxWidth="130.0" minWidth="130.0" mnemonicParsing="false" style="-fx-background-color: #DE350B;" text="Delete Selected" textFill="WHITE">
-                     <font>
-                        <Font name="Segoe UI Bold" size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="20.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="btn_clear" maxWidth="130.0" minWidth="130.0" mnemonicParsing="false" style="-fx-background-color: #DE350B;" text="Clear Data" textFill="WHITE">
+                  <Button fx:id="btn_clear1" maxHeight="28.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="60.0" style="-fx-background-color: #DE350B; -fx-background-radius: 6;" text="Stop" textFill="WHITE">
                      <font>
                         <Font name="Segoe UI Bold" size="14.0" />
                      </font>
                   </Button>
                </children>
                <VBox.margin>
-                  <Insets top="5.0" />
+                  <Insets top="10.0" />
                </VBox.margin>
             </HBox>
          </children>
          <padding>
-            <Insets bottom="20.0" left="30.0" right="30.0" top="10.0" />
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
          </padding>
       </VBox>
    </children>
-</VBox>
+</StackPane>

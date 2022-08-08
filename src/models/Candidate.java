@@ -1,4 +1,4 @@
-package classes;
+package models;
 
 import javafx.scene.image.ImageView;
 
@@ -63,6 +63,13 @@ public class Candidate {
 		this.candID = candID;
 		this.totalVote = totalVote;
 		this.photo = photo;
+	}
+	
+	public Candidate(String image, String fname, String lname, String candID) {
+		this.image = image;
+		this.fname = fname;
+		this.lname = lname;
+		this.candID = candID;
 	}
 
 	public String getImage() {
