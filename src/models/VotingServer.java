@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javafx.collections.FXCollections;
@@ -15,7 +16,7 @@ import javafx.scene.image.ImageView;
 public class VotingServer {
 	private static LocalDate startDate;
 	private static LocalDate endDate;
-	//private List<String> candidateList = new ArrayList<>();
+	private static List<Candidate> votingResult = new ArrayList<>();
 	private static boolean isVotingResultShown = false;
 	
 	public VotingServer(){
@@ -25,7 +26,7 @@ public class VotingServer {
 	public static void initializeDB() {
 		PreparedStatement preparedStatement = null;
     	ResultSet rs = null;
-    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/d/yyyy");
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
     	
     	String Query = "SELECT * FROM VotingServer WHERE votingMachine = 0;";
     	
@@ -120,6 +121,7 @@ public class VotingServer {
     		preparedStatement = SQLdatabase.conn.prepareStatement(getTotalVoteQuery);
     		preparedStatement.setString(1, candID);
     		rs = preparedStatement.executeQuery();
+    		
     		if (rs.next()) {
     			total = rs.getInt(1);
     		}
@@ -153,15 +155,113 @@ public class VotingServer {
 		return isVotingResultShown;
 	}
 	
-	
-	
-	//===========================================================================================
-	public void saveDate(LocalDate start, LocalDate end) {
-		startDate = start;
-		endDate = end;
+	public static List<Candidate> getVotingResult() {
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		String name = "";
+		
+		String query = "SELECT fname, lname, img, totalVotes FROM Candidate ORDER BY totalvotes DESC;";
+		
+		try {
+    		preparedStatement = SQLdatabase.conn.prepareStatement(query);
+    		rs = preparedStatement.executeQuery();
+    		while (rs.next()) {
+    			
+    			votingResult.add(new Candidate(
+		    					rs.getString("img"),
+		    					rs.getString("fname"),
+		    					rs.getString("lname"),
+		    					rs.getInt("totalVotes")
+								));
+    		}
+    		
+    	} catch (Exception e) {
+    		System.out.println(e + "2");
+    	}
+		
+		return votingResult;
 	}
 	
-	public void saveShowResult() {
+	public static int getSumOfAllVotes() {
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		int sum = 0;
+		
+		String query = "SELECT SUM(totalVotes) as sum_totalVotes FROM Candidate; ";
+		
+		try {
+    		preparedStatement = SQLdatabase.conn.prepareStatement(query);
+    		rs = preparedStatement.executeQuery();
+    		if (rs.next()) {
+    			sum = rs.getInt("sum_totalVotes");
+    		}
+    		
+    	} catch (Exception e) {
+    		System.out.println(e + "2");
+    	}
+		
+		return sum;
+	}
+		
+	
+	//===========================================================================================
+	
+	
+	public void saveDate(LocalDate start, LocalDate end) {
+		
+		PreparedStatement preparedStatement = null;
+    	
+    	String updateStartDateQuery = "UPDATE VotingServer SET startDate = ? WHERE votingMachine = 0; ";
+    	String updateEndDateQuery = "UPDATE VotingServer SET endDate = ? WHERE votingMachine = 0; ";
+    	
+    	try {
+    		
+    		String strStartDate = start.format(DateTimeFormatter.ofPattern("d/MM/yyyy"));
+    		
+    		preparedStatement = SQLdatabase.conn.prepareStatement(updateStartDateQuery);
+    		preparedStatement.setString(1, strStartDate);
+    		preparedStatement.execute();
+    		startDate = start;
+    		
+    	} catch (Exception e) {
+    		System.out.println(e);
+    	}
+    	
+    	try {
+  
+    		String strEndDate = end.format(DateTimeFormatter.ofPattern("d/MM/yyyy"));
+    		
+    		preparedStatement = SQLdatabase.conn.prepareStatement(updateEndDateQuery);
+    		preparedStatement.setString(1, strEndDate);
+    		preparedStatement.execute();
+      		endDate = end;
+    		
+    	} catch (Exception e) {
+    		System.out.println(e);
+    	}
+    	
+	}
+	
+	public void saveShowResult(boolean checkbox) {
+		PreparedStatement preparedStatement = null;
+		int converted;
+		
+		if(checkbox) converted = 1;
+		else converted = 0;
+		
+		String query = "UPDATE VotingServer SET showResult = ? WHERE votingMachine = 0; ";
+		
+		try {
+			
+    		preparedStatement = SQLdatabase.conn.prepareStatement(query);
+    		preparedStatement.setInt(1, converted);
+    		preparedStatement.execute();
+			isVotingResultShown = checkbox;
+    		
+    		
+    	} catch (Exception e) {
+    		System.out.println(e);
+    	}
 		
 	}
 	

@@ -71,6 +71,13 @@ public class Candidate {
 		this.lname = lname;
 		this.candID = candID;
 	}
+	
+	public Candidate(String image, String fname, String lname, int totalVote) {
+		this.image = image;
+		this.fname = fname;
+		this.lname = lname;
+		this.totalVote = totalVote;
+	}
 
 	public String getImage() {
 		return image;

@@ -170,7 +170,7 @@
             </VBox>
          </children>
       </VBox>
-      <VBox fx:id="settingMenu" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="285.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" StackPane.alignment="TOP_RIGHT">
+      <VBox fx:id="settingMenu" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="285.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" visible="false" StackPane.alignment="TOP_RIGHT">
          <StackPane.margin>
             <Insets right="40.0" top="80.0" />
          </StackPane.margin>

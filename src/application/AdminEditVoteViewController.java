@@ -97,7 +97,7 @@ public class AdminEditVoteViewController implements Initializable{
 
     @FXML
     void showResultSave(ActionEvent event) {
-
+    	Admin.getInstance().getVotingServer().saveShowResult(checkbox_result.isSelected());
     }
 	
 	void initTable() {

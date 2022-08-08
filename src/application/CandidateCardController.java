@@ -36,7 +36,7 @@ public class CandidateCardController {
     @FXML
     private Button candVote;
     
-    Candidate candidate;
+    private Candidate candidate;
     
     @FXML
     void vote(ActionEvent event) throws IOException {
