@@ -6,6 +6,8 @@ import java.util.ResourceBundle;
 
 import interfaces.WindowLoad;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,6 +19,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import models.Admin;
 import models.VoterStruct;
@@ -25,6 +32,8 @@ import models.VotingServer;
 public class AdminEditUserViewController implements Initializable, WindowLoad{
 	Admin admin = Admin.getInstance();
 	VotingServer votingServer = new VotingServer();
+	
+	private int index = -1;
 	
     @FXML
     private TableView<VoterStruct> table_user;
@@ -43,26 +52,27 @@ public class AdminEditUserViewController implements Initializable, WindowLoad{
 
     @FXML
     private TableColumn<VoterStruct, String> col_userid;
-
-    @FXML
-    private TextField tv_search;
-    
-	@FXML
-    private Button btn_search;
 	
     @FXML
     private Button btn_addUser;
 
     @FXML
     private Button btn_delete;
-	
-
+    
     @FXML
-    private ChoiceBox<?> cb_category;
-
+    private VBox main_vbox;
+    
+    @FXML
+    void getSelected(MouseEvent event) {
+    	index = table_user.getSelectionModel().getSelectedIndex();    	
+    }
+    
+    
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initTable();
+		
+		initHandler();
 	}
 	
     private void initTable() {
@@ -79,11 +89,29 @@ public class AdminEditUserViewController implements Initializable, WindowLoad{
 		list = Admin.getInstance().getVotingServer().getVoterData();
 		
 		table_user.setItems(list);
+
     }
     
     @FXML
-    private void addUser() {
+    private void addUser(ActionEvent event) {
     	windowLoad("adminAddUser.fxml", "Add User");
+    	
+    }
+    
+
+    @FXML
+    void deleteUser(ActionEvent event) {
+    	if (index <= -1) {
+    		return;
+    	}
+    	String id = col_userid.getCellData(index).toString();
+    	Admin.getInstance().getVotingServer().deleteUserData(id);
+    	
+    	refreshTable();
+    }
+    
+    public void refreshTable() {
+    	initTable();
     }
 
 	@Override
@@ -100,5 +128,15 @@ public class AdminEditUserViewController implements Initializable, WindowLoad{
     		System.out.println(e.getMessage());
     	}
 		
+	}
+	
+	void initHandler() {
+		main_vbox.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+		     @Override
+		     public void handle(MouseEvent event) {
+		    	 refreshTable();
+		         event.consume();
+		     }
+		});
 	}
 }

@@ -8,9 +8,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import models.Voter;
 
 public class UserNavigationController implements Initializable{
@@ -56,8 +60,14 @@ public class UserNavigationController implements Initializable{
     }
 
     @FXML
-    void logout(ActionEvent event) {
-
+    void logout(ActionEvent event) throws IOException {
+    	Voter.deleteInstance();
+    	
+    	Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml")); 
+		Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow(); 
+		Scene scene = new Scene(root);
+		stage.setScene(scene); 
+		stage.show();
     }
     
     private void loadFXML(URL url) {

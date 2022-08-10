@@ -20,7 +20,7 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <ProgressBar fx:id="pb_bar" maxWidth="1.7976931348623157E308" minHeight="16.0" progress="0.2" stylesheets="@../css/progressBar.css" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+      <ProgressBar fx:id="pb_bar" maxWidth="1.7976931348623157E308" minHeight="16.0" progress="0.54" stylesheets="@../css/progressBar.css" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
       <Text fx:id="tv_percent" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0%" GridPane.columnIndex="2">
          <GridPane.margin>
             <Insets right="20.0" />

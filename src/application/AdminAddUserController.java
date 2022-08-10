@@ -3,8 +3,12 @@ package application;
 import interfaces.WindowClose;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import models.Admin;
 import models.VotingServer;
 
@@ -29,6 +33,7 @@ public class AdminAddUserController implements WindowClose{
     @FXML
     private TextField tv_pw;
     
+    
     @FXML
     void addUser(ActionEvent event) {
     	String fn = tv_fn.getText();
@@ -36,21 +41,28 @@ public class AdminAddUserController implements WindowClose{
     	String email = tv_email.getText();
     	String pw = tv_pw.getText();
     	
-    	Admin.getInstance().setVotingServer(votingServer);
-    	Admin.getInstance().getVotingServer().addUser(fn, ln, email, pw);
+    	if (!(fn.isBlank() || ln.isBlank() || email.isBlank() || pw.isBlank())) {
+    		Admin.getInstance().setVotingServer(votingServer);
+			Admin.getInstance().getVotingServer().addUser(fn, ln, email, pw);
+			
+			windowClose(event);
+    	}
     	
-    	// success
+//    	FXMLLoader loader = new FXMLLoader(getClass().getResource("adminEditUserView.fxml"));
+//    	AdminEditUserViewController controller = loader.getController();
+//    	controller.refreshTable();
+			
     }
 
     @FXML
     void cancel(ActionEvent event) {
-
+    	windowClose(event);
     }
 
 	@Override
 	public void windowClose(ActionEvent event) {
-		
-		
+		Stage previousWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
+    	previousWindow.close();
 	}
     
 }

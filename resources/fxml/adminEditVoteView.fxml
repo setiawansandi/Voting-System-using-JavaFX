@@ -3,11 +3,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -39,13 +37,13 @@
                            <children>
                               <HBox fx:id="hbox_setting" alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="110.0">
                                  <children>
-                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="file:/D:/eclipse-workspace/Voting_System/resources/img/setting_214.png" />
-                                       </image>
+                                    <ImageView fx:id="iv_settingIcon" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                        <HBox.margin>
                                           <Insets right="10.0" />
                                        </HBox.margin>
+                                       <image>
+                                          <Image url="@../img/setting_214.png" />
+                                       </image>
                                     </ImageView>
                                     <Text fx:id="iv_setting" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings">
                                        <font>
@@ -68,50 +66,33 @@
                      <children>
                         <GridPane HBox.hgrow="ALWAYS">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="519.2000061035156" minWidth="10.0" prefWidth="490.3999877929688" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="418.3999206542968" minWidth="10.0" prefWidth="213.60001220703123" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="420.40002441406244" minWidth="10.0" prefWidth="194.80007934570312" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" />
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
-                           <children>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Search" GridPane.halignment="LEFT">
-                                 <font>
-                                    <Font name="Segoe UI" size="14.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets bottom="10.0" />
-                                 </GridPane.margin>
-                              </Text>
-                              <TextField fx:id="tv_search" GridPane.rowIndex="1">
-                                 <GridPane.margin>
-                                    <Insets right="50.0" />
-                                 </GridPane.margin>
-                              </TextField>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Filter" GridPane.columnIndex="1">
-                                 <font>
-                                    <Font name="Segoe UI" size="14.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets bottom="10.0" />
-                                 </GridPane.margin>
-                              </Text>
-                              <ChoiceBox fx:id="cb_category" prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
-                                 <children>
-                                    <Button fx:id="btn_search" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: #0052cc;" text="Search" textFill="WHITE">
-                                       <font>
-                                          <Font name="Segoe UI Bold" size="14.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                           </children>
                            <HBox.margin>
                               <Insets bottom="8.0" top="8.0" />
                            </HBox.margin>
+                           <children>
+                              <Button maxWidth="130.0" minWidth="130.0" mnemonicParsing="false" onAction="#addCandidate" style="-fx-background-color: #0052cc;" text="Add Candidate" textFill="WHITE">
+                                 <font>
+                                    <Font name="Segoe UI Bold" size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button maxWidth="130.0" minWidth="130.0" mnemonicParsing="false" onAction="#deleteCandidate" style="-fx-background-color: #DE350B;" text="Delete Selected" textFill="WHITE" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font name="Segoe UI Bold" size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button maxWidth="130.0" minWidth="130.0" mnemonicParsing="false" onAction="#deleteAllCandidate" style="-fx-background-color: #DE350B;" text="Clear Data" textFill="WHITE" GridPane.columnIndex="2">
+                                 <font>
+                                    <Font name="Segoe UI Bold" size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
                         </GridPane>
                      </children>
                   </HBox>
@@ -122,7 +103,7 @@
             </VBox>
             <VBox prefHeight="200.0" style="-fx-background-color: #42526e;" VBox.vgrow="ALWAYS">
                <children>
-                  <TableView fx:id="table_cand" prefHeight="263.0" prefWidth="570.0" style="-fx-background-radius: 0 0 10 10;" VBox.vgrow="ALWAYS">
+                  <TableView fx:id="table_cand" onMouseClicked="#getSelected" prefHeight="263.0" prefWidth="570.0" style="-fx-background-radius: 0 0 10 10;" VBox.vgrow="ALWAYS">
                      <columns>
                         <TableColumn fx:id="col_img" maxWidth="-1.0" minWidth="120.0" prefWidth="-1.0" style="-fx-alignment: TOP-CENTER;" text="Photo" />
                         <TableColumn fx:id="col_candid" maxWidth="130.0" minWidth="120.0" prefWidth="-1.0" text="CandidateID" />
@@ -135,42 +116,14 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <HBox alignment="BOTTOM_LEFT" prefHeight="40.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="btn_addUser" maxWidth="130.0" minWidth="130.0" mnemonicParsing="false" style="-fx-background-color: #0052cc;" text="Add Candidate" textFill="WHITE">
-                           <HBox.margin>
-                              <Insets right="20.0" />
-                           </HBox.margin>
-                           <font>
-                              <Font name="Segoe UI Bold" size="14.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="btn_delete" maxWidth="130.0" minWidth="130.0" mnemonicParsing="false" style="-fx-background-color: #DE350B;" text="Delete Selected" textFill="WHITE">
-                           <font>
-                              <Font name="Segoe UI Bold" size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets right="20.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button fx:id="btn_clear" maxWidth="130.0" minWidth="130.0" mnemonicParsing="false" style="-fx-background-color: #DE350B;" text="Clear Data" textFill="WHITE">
-                           <font>
-                              <Font name="Segoe UI Bold" size="14.0" />
-                           </font>
-                        </Button>
-                     </children>
-                     <VBox.margin>
-                        <Insets top="5.0" />
-                     </VBox.margin>
-                  </HBox>
                </children>
                <padding>
-                  <Insets bottom="20.0" left="30.0" right="30.0" top="10.0" />
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="10.0" />
                </padding>
             </VBox>
          </children>
       </VBox>
-      <VBox fx:id="settingMenu" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="285.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" visible="false" StackPane.alignment="TOP_RIGHT">
+      <VBox fx:id="settingMenu" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="220.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" StackPane.alignment="TOP_RIGHT">
          <StackPane.margin>
             <Insets right="40.0" top="80.0" />
          </StackPane.margin>
@@ -240,7 +193,7 @@
                   <Insets top="25.0" />
                </VBox.margin>
             </HBox>
-            <HBox>
+            <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="50.0">
                      <children>
@@ -260,22 +213,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </HBox>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Stop Voting">
-               <font>
-                  <Font name="Segoe UI Semibold" size="18.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </Text>
             <HBox>
-               <children>
-                  <Button fx:id="btn_clear1" maxHeight="28.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="60.0" style="-fx-background-color: #DE350B; -fx-background-radius: 6;" text="Stop" textFill="WHITE">
-                     <font>
-                        <Font name="Segoe UI Bold" size="14.0" />
-                     </font>
-                  </Button>
-               </children>
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>

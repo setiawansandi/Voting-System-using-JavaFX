@@ -28,7 +28,8 @@ public class ResultCardController{
     	
     	tv_name.setText(candidate.getFname() + " " + candidate.getLname());
     	
-    	Image im = new Image(this.getClass().getResourceAsStream(candidate.getImage()));
+    	//Image im = new Image(this.getClass().getResourceAsStream(candidate.getImage()));
+    	Image im = new Image(candidate.getImage());
     	iv_profile.setFill(new ImagePattern(im));
     	
     	// twodp = Math.round(input * 100.0) / 100.0;

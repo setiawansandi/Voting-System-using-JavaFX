@@ -27,4 +27,8 @@ public class Admin extends User{
 	public VotingServer getVotingServer() {
 		return voteServer;
 	}
+	
+	public static void deleteInstance() {
+		instance  = null;
+	}
 }

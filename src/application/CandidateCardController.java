@@ -65,7 +65,10 @@ public class CandidateCardController {
     public void setData(Candidate candidate) {
     	this.candidate = candidate;
     	candName.setText(candidate.getFname() + " " + candidate.getLname());
-    	Image im = new Image(this.getClass().getResourceAsStream(candidate.getImage()));
+    	
+    	//Image im = new Image(this.getClass().getResourceAsStream(candidate.getImage()));
+    	Image im = new Image(candidate.getImage());
+    	
     	candProfile.setFill(new ImagePattern(im));
     }
 }

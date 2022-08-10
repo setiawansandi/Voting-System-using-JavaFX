@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import models.Candidate;
 import models.VotingServer;
 
@@ -21,11 +22,33 @@ public class UserResultViewController implements Initializable{
 
     @FXML
     private ScrollPane scroll;
+    
+    @FXML
+    private HBox hb_alert;
+    
+    @FXML
+    private HBox hb_resultBox;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// check if result shown/////////////////////////////////////////////////////////////////////
-
+		if(VotingServer.isVotingResultShown()) {
+			
+			hb_alert.setVisible(false);
+			hb_alert.setManaged(false);
+			hb_resultBox.setVisible(true);
+			hb_resultBox.setManaged(true);
+			initResult();
+			
+		} else {
+			hb_alert.setVisible(true);
+			hb_alert.setManaged(true);
+			hb_resultBox.setVisible(false);
+			hb_resultBox.setManaged(false);
+		}
+		
+	}
+	
+	void initResult() {
 		List<Candidate> votingResult = VotingServer.getVotingResult();
 		int sum_totalVotes = VotingServer.getSumOfAllVotes();
 		
@@ -52,8 +75,6 @@ public class UserResultViewController implements Initializable{
 		} catch (IOException e) {
 			System.out.println(e);
 		}
-		
-		
 	}
 
 }

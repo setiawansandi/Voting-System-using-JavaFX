@@ -80,12 +80,12 @@
 										<Font size="24.0" />
 									</font>
 								</Text>
-								<Text fx:id="dash_day" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+								<Text fx:id="dash_time" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
 									<font>
 										<Font name="Segoe UI" size="72.0" />
 									</font>
 								</Text>
-								<Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="days" textAlignment="CENTER">
+								<Text fx:id="tv_unit" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="days" textAlignment="CENTER">
 									<font>
 										<Font size="24.0" />
 									</font>

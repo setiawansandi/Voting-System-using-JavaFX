@@ -20,7 +20,11 @@ public class Voter extends User{
 	public static Voter getInstance() {
 		return instance;
 	}
-
+	
+	public static void deleteInstance() {
+		instance  = null;
+	}
+	
 	public String getHasVoted() {
 		return hasVoted;
 	}
@@ -28,4 +32,5 @@ public class Voter extends User{
 	public void setHasVoted(String hasVoted) {
 		this.hasVoted = hasVoted;
 	}
+	
 }

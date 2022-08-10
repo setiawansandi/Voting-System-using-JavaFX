@@ -158,7 +158,6 @@ public class VotingServer {
 	public static List<Candidate> getVotingResult() {
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String name = "";
 		
 		String query = "SELECT fname, lname, img, totalVotes FROM Candidate ORDER BY totalvotes DESC;";
 		
@@ -205,7 +204,6 @@ public class VotingServer {
 		
 	
 	//===========================================================================================
-	
 	
 	public void saveDate(LocalDate start, LocalDate end) {
 		
@@ -317,7 +315,14 @@ public class VotingServer {
     		rs = preparedStatement.executeQuery();
     		while (rs.next()) {
     			photo = new ImageView();
-    	        photo.setImage(new Image(this.getClass().getResourceAsStream(rs.getString("img"))));
+    	        
+    	        try {
+    	        	//photo.setImage(new Image(this.getClass().getResourceAsStream(rs.getString("img"))));
+    	    		photo.setImage(new Image(rs.getString("img")));
+    	        } catch (Exception e) {
+    	        	System.out.println(e);
+    	        }
+    	        
     	        photo.setFitWidth(100);
     	        photo.setPreserveRatio(true);
     	        photo.setSmooth(true);
@@ -372,7 +377,7 @@ public class VotingServer {
 		
 		PreparedStatement preparedStatement = null;
     	ResultSet rs = null;
-    	String userQuery = "SELECT COUNT(*) FROM Candidate;";
+    	String userQuery = "SELECT COUNT(*) as totalRow FROM UserAccount;";
 
     	try {
     		preparedStatement = SQLdatabase.conn.prepareStatement(userQuery);
@@ -387,23 +392,116 @@ public class VotingServer {
     		}
     		
     	} catch (Exception e) {
+    		System.out.println(e + "1");
+    	}
+		
+    	System.out.println(ID);
+    	String userQuery2 = "INSERT INTO main.UserAccount VALUES (?, ?, ?, ?, ?, ?);";
+    	//('V0000006', '123456', 'John', 'Cena', '0', 'johncn@invis.com');
+    	
+    	try {
+    		preparedStatement = SQLdatabase.conn.prepareStatement(userQuery2);
+    		preparedStatement.setString(1, ID);
+    		preparedStatement.setString(2, pw);
+    		preparedStatement.setString(3, fn);
+    		preparedStatement.setString(4, ln);
+    		preparedStatement.setString(5, "0");
+    		preparedStatement.setString(6, email);
+    		
+    		preparedStatement.execute();
+    		
+    		
+    	} catch (Exception e) {
+    		System.out.println(e + "2");
+    	}
+	}
+	
+	public void addCandidate(String fn, String ln, String email, String img) {
+		String ID = "";
+		
+		PreparedStatement preparedStatement = null;
+    	ResultSet rs = null;
+    	String userQuery = "SELECT COUNT(*) as totalRow FROM Candidate;";
+
+    	try {
+    		preparedStatement = SQLdatabase.conn.prepareStatement(userQuery);
+   		
+    		rs = preparedStatement.executeQuery();
+    		// V + 000.. + ID
+    		if (rs.next()) {
+    			for(int i = 0; i < (7 - rs.getString(1).length()); i++) {
+    				ID = ID + "0";
+    			}
+    			ID = "C" + ID + rs.getString(1);
+    		}
+    		
+    	} catch (Exception e) {
+    		System.out.println(e + "1");
+    	}
+		
+    	System.out.println(ID);
+    	String userQuery2 = "INSERT INTO main.Candidate VALUES (?, ?, ?, ?, ?, ?);";
+    	//('V0000006', '123456', 'John', 'Cena', '0', 'johncn@invis.com');
+    	
+    	try {
+    		preparedStatement = SQLdatabase.conn.prepareStatement(userQuery2);
+    		preparedStatement.setString(1, ID);
+    		preparedStatement.setString(2, fn);
+    		preparedStatement.setString(3, ln);
+    		preparedStatement.setString(4, img);
+    		preparedStatement.setInt(5, 0);
+    		preparedStatement.setString(6, email);
+    		
+    		preparedStatement.execute();
+    		
+    		
+    	} catch (Exception e) {
+    		System.out.println(e + "2");
+    	}
+	}
+	
+	public void deleteUserData(String userID) {
+		//DELETE FROM UserAccount WHERE userID = "V0000011";
+		PreparedStatement preparedStatement = null;
+    	String deleteQuery = "DELETE FROM UserAccount WHERE userID = ?;";
+    	
+    	try {
+    		preparedStatement = SQLdatabase.conn.prepareStatement(deleteQuery);
+    		preparedStatement.setString(1, userID);
+    		preparedStatement.execute();
+    		
+    	} catch (Exception e) {
     		System.out.println(e);
     	}
-				
-//    	String userQuery2 = "INSERT INTO UserAccount VALUES (?, ?, ?, ?, ?, ?);";
-//
-//    	try {
-//    		preparedStatement = SQLdatabase.conn.prepareStatement(userQuery);
-//   		
-//    		rs = preparedStatement.executeQuery();
-//    		if (rs.next()) {
-//    			return rs.getInt(1);
-//    		}
-//    		
-//    	} catch (Exception e) {
-//    		System.out.println(e);
-//    	}
-//    	return 0;
+	}
+	
+	public void deleteCandData(String candID) {
+		//DELETE FROM UserAccount WHERE userID = "V0000011";
+		PreparedStatement preparedStatement = null;
+    	String deleteQuery = "DELETE FROM Candidate WHERE candID = ?;";
+    	
+    	try {
+    		preparedStatement = SQLdatabase.conn.prepareStatement(deleteQuery);
+    		preparedStatement.setString(1, candID);
+    		preparedStatement.execute();
+    		
+    	} catch (Exception e) {
+    		System.out.println(e);
+    	}
+	}
+	
+	public void deleteAllCandData() {
+		//DELETE FROM UserAccount WHERE userID = "V0000011";
+		PreparedStatement preparedStatement = null;
+    	String deleteQuery = "DELETE FROM Candidate";
+    	
+    	try {
+    		preparedStatement = SQLdatabase.conn.prepareStatement(deleteQuery);
+    		preparedStatement.execute();
+    		
+    	} catch (Exception e) {
+    		System.out.println(e);
+    	}
 	}
 	
 }
